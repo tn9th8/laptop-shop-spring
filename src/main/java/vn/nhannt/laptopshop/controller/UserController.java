@@ -1,6 +1,7 @@
 package vn.nhannt.laptopshop.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import vn.nhannt.laptopshop.service.UserService;
@@ -14,8 +15,9 @@ public class UserController {
     }
 
     @RequestMapping("/")
-    public String getHomePage() {
+    public String getHomePage(Model model) {
         String test = userService.handleHomePage();
+        model.addAttribute("nhannt", test);
         return "hello";
     }
 
