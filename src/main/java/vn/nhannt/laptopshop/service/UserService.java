@@ -17,8 +17,31 @@ public class UserService {
 
     // create one
     public User createOne(User user) {
-        final User newUser = this.userRepository.save(user);
+        final User newUser = this.userRepository.save(user); // save : upsert
         return newUser;
+    }
+
+    // update one
+    public User updateOne(User user) {
+        // find one
+        final User tempUser = this.getOne(user.getId());
+        // mapping
+        tempUser.setFullName(user.getFullName());
+        tempUser.setPhone(user.getPhone());
+        tempUser.setAddress(user.getAddress());
+        // save
+        final User existingUser = this.userRepository.save(tempUser); // save : upsert
+        return existingUser;
+    }
+
+    // delete one
+    public void deleteOne(User user) {
+        // is exist
+        if (!this.userRepository.existsById(user.getId())) {
+            throw new RuntimeException("User is not existing");
+        }
+        // delete
+        this.userRepository.deleteById(user.getId());
     }
 
     // get all
@@ -29,7 +52,8 @@ public class UserService {
 
     // get one
     public User getOne(Long id) {
-        final User user = this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        final User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User is not existing"));
         return user;
     }
 

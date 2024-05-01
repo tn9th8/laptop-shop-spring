@@ -6,7 +6,7 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
+                <title>detail user page</title>
                 <!-- Bootstrap CSS -->
                 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
                 <!-- Bootstrap JavaScript -->
@@ -27,16 +27,17 @@
                             </div>
                             <hr />
                             <div class="card">
-                                <div class="card-header">
-                                    Detail information of user-${userView.id}
-                                </div>
+                                <div class="card-header"><strong>
+                                        Detail information of user-${userView.id}
+                                </div></strong>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">Email: ${userView.email}</li>
                                     <li class="list-group-item">Full Name: ${userView.fullName}</li>
                                     <li class="list-group-item">Address: ${userView.address}</li>
                                 </ul>
                                 <div class="card-footer">
-                                    <button class="btn btn-primary">To do</button>
+                                    <a href="/admin/user/update/${userView.id}" class="btn btn-warning">Update</a>
+                                    <a href="/admin/user/delete/${userView.id}" class="btn btn-danger">Delete</a>
                                 </div>
                             </div>
                         </div>
