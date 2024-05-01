@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 import vn.nhannt.laptopshop.domain.User;
 import java.util.List;
 
+// Spring data (Hibernate/JPA)
+// Repository pattern
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     // self-defined example methods

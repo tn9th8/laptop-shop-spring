@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+// Spring data (Hibernate/JPA)
+// Domain-driven design
 @Entity
 public class User {
     // fields, attributes

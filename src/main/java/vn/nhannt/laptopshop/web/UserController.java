@@ -1,4 +1,4 @@
-package vn.nhannt.laptopshop.controller;
+package vn.nhannt.laptopshop.web;
 
 import java.util.List;
 
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import vn.nhannt.laptopshop.domain.User;
 import vn.nhannt.laptopshop.service.UserService;
 
+// Spring MVC
+// MVC pattern
 @Controller
 public class UserController {
     private final UserService userService;
