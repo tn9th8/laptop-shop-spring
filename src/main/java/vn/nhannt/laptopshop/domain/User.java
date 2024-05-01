@@ -1,7 +1,16 @@
 package vn.nhannt.laptopshop.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class User {
-    private String id;
+    // fields, attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private String email;
     private String password;
     private String fullName;
@@ -15,12 +24,16 @@ public class User {
                 + ", address=" + address + ", phone=" + phone + "]";
     }
 
+    // no-arg constructor
+    public User() {
+    }
+
     // getter, setter
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -25,7 +25,7 @@ public class UserController {
 
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(@ModelAttribute("userView") User userView) {
-        System.out.println("run here: " + userView.toString());
+        System.out.println("View: " + userView.toString());
         return "hello";
     }
 
