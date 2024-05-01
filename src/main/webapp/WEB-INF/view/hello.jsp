@@ -12,14 +12,13 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
             <!-- Jquery -->
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-            <link href="/css/demo.css" ref="stylesheet">
+            <!-- CSS -->
+            <link href="/css/loading.css" rel="stylesheet">
         </head>
 
         <body>
-            hello from jsp
             <h2>
-                ${nhannt}
+                ${test}
             </h2>
             <button>Submit</button>
         </body>
