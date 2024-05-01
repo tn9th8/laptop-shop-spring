@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -15,6 +16,7 @@ import vn.nhannt.laptopshop.service.UserService;
 public class UserController {
     private final UserService userService;
 
+    // DI
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -43,10 +45,18 @@ public class UserController {
         return "admin/user/table-page";
     }
 
+    // get one
+    @RequestMapping("/admin/user/detail/{id}")
+    public String handleGetOne(Model model, @PathVariable Long id) {
+        User user = this.userService.getOne(id);
+        model.addAttribute("userView", user);
+        return "admin/user/detail-page";
+    }
+
     // get home view
     @RequestMapping("/")
     public String getHomePage(Model model) {
-        String test = userService.handleHomePage();
+        String test = userService.getHomePage();
         model.addAttribute("test", test);
         return "hello-page";
     }

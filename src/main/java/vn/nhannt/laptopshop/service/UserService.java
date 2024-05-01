@@ -10,21 +10,31 @@ import vn.nhannt.laptopshop.repository.UserRepository;
 public class UserService {
     private final UserRepository userRepository;
 
+    // DI
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
+    // create one
     public User createOne(User user) {
         final User newUser = this.userRepository.save(user);
         return newUser;
     }
 
+    // get all
     public List<User> getAll() {
         final List<User> users = this.userRepository.findAll();
         return users;
     }
 
-    public String handleHomePage() {
+    // get one
+    public User getOne(Long id) {
+        final User user = this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return user;
+    }
+
+    // get home page
+    public String getHomePage() {
         return "hello Spring MVC";
     }
 }

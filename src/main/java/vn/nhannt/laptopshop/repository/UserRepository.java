@@ -7,6 +7,7 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+    // self-defined example methods
     List<User> findByEmail(String email);
 
     User findFirstByEmail(String email);
