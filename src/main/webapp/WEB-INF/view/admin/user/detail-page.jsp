@@ -32,35 +32,27 @@
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
-                                                <h3>Update a user</h3>
+                                                <h3>User Detail</h3>
                                                 <a href="/admin/user" class="btn btn-primary">Back </a>
                                             </div>
                                             <hr />
-                                            <f:form method="post" action="/admin/user/update" modelAttribute="userView">
-                                                <div class="mb-3" style="display: none;">
-                                                    <label class="form-label">Id:</label>
-                                                    <f:input path="id" type="text" class="form-control" />
+                                            <div class="card">
+                                                <div class="card-header"><strong>
+                                                        Detail information of user-${userView.id}
+                                                </div></strong>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">Email: ${userView.email}</li>
+                                                    <li class="list-group-item">Full Name: ${userView.fullName}</li>
+                                                    <li class="list-group-item">Phone: ${userView.phone}</li>
+                                                    <li class="list-group-item">Address: ${userView.address}</li>
+                                                </ul>
+                                                <div class="card-footer">
+                                                    <a href="/admin/user/update/${userView.id}"
+                                                        class="btn btn-warning">Update</a>
+                                                    <a href="/admin/user/delete/${userView.id}"
+                                                        class="btn btn-danger">Delete</a>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Email:</label>
-                                                    <f:input path="email" type="email" class="form-control"
-                                                        disabled="true" />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Phone number:</label>
-                                                    <f:input path="phone" type="text" class="form-control" />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Full Name:</label>
-                                                    <f:input path="fullName" type="text" class="form-control" />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Address:</label>
-                                                    <f:input path="address" type="text" class="form-control" />
-                                                </div>
-
-                                                <button type="submit" class="btn btn-warning">Update</button>
-                                            </f:form>
+                                            </div>
                                         </div>
 
                                     </div>

@@ -8,6 +8,6 @@ public class ProductController {
 
     @GetMapping("/admin/product")
     public String getDashboard() {
-        return "admin/product/show";
+        return "admin/product/home-page";
     }
 }

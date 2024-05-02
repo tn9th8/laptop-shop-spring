@@ -75,7 +75,7 @@ public class UserController {
     public String handleGetAll(Model model) {
         List<User> users = this.userService.getAll();
         model.addAttribute("usersView", users);
-        return "admin/user/table-page";
+        return "admin/user/home-page";
     }
 
     // get one
@@ -83,15 +83,6 @@ public class UserController {
     public String handleGetOne(Model model, @PathVariable Long id) {
         User user = this.userService.getOne(id);
         model.addAttribute("userView", user);
-        return "admin/user/show-page";
+        return "admin/user/detail-page";
     }
-
-    // get home view
-    @RequestMapping("/")
-    public String getHomePage(Model model) {
-        String test = userService.getHomePage();
-        model.addAttribute("test", test);
-        return "hello-page";
-    }
-
 }

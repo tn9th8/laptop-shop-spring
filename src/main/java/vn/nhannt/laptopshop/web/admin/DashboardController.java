@@ -10,6 +10,6 @@ public class DashboardController {
     // get home view
     @RequestMapping("/admin")
     public String getDashboard() {
-        return "admin/dashboard/show";
+        return "admin/dashboard/home-page";
     }
 }
