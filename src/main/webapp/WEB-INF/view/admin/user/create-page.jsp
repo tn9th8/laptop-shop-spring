@@ -13,6 +13,19 @@
                 <title>Dashboard - Hỏi Dân IT</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <!-- Display file -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
+
             </head>
 
             <body>
@@ -28,7 +41,7 @@
                                     <li class="breadcrumb-item active">Users</li>
                                 </ol>
 
-                                <div class="container mt-5">
+                                <div class="container mt-5 mb-5">
                                     <div class="row">
                                         <div class="col-md-6 col-12 mx-auto">
                                             <div class="d-flex justify-content-between">
@@ -36,29 +49,48 @@
                                                 <a href="/admin/user" class="btn btn-primary">Back </a>
                                             </div>
                                             <hr />
-                                            <f:form method="POST" action="/admin/user/create" modelAttribute="userView">
-                                                <div class="mb-3">
+                                            <f:form method="post" action="/admin/user/create" modelAttribute="userView"
+                                                enctype="multipart/form-data" class="row">
+                                                <!-- form-data: bien file thanh binary de gui len server -->
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Email:</label>
                                                     <f:input path="email" type="email" class="form-control" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Password:</label>
                                                     <f:input path="password" type="password" class="form-control" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Phone number:</label>
                                                     <f:input path="phone" type="text" class="form-control" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Full Name:</label>
                                                     <f:input path="fullName" type="text" class="form-control" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12">
                                                     <label class="form-label">Address:</label>
                                                     <f:input path="address" type="text" class="form-control" />
                                                 </div>
-
-                                                <button type="submit" class="btn btn-primary">Create</button>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Role:</label>
+                                                    <f:select path="role.name" class="form-select">
+                                                        <f:option value="ADMIN">ADMIN</f:option>
+                                                        <f:option value="USER">USER</f:option>
+                                                    </f:select>
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Avatar:</label>
+                                                    <input name="fileView" type="file" class="form-control"
+                                                        id="avatarFile" accept=".png, .jpg, .jpeg" />
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                        id="avatarPreview" />
+                                                </div>
+                                                <div class="col-12 mb-5">
+                                                    <button type="submit" class="btn btn-primary">Create</button>
+                                                </div>
                                             </f:form>
                                         </div>
 

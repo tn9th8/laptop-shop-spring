@@ -1,5 +1,9 @@
 package vn.nhannt.laptopshop.web.admin;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -10,8 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.servlet.ServletContext;
 import vn.nhannt.laptopshop.domain.User;
+import vn.nhannt.laptopshop.service.FileUploadService;
 import vn.nhannt.laptopshop.service.UserService;
 
 // Spring MVC
@@ -19,10 +27,12 @@ import vn.nhannt.laptopshop.service.UserService;
 @Controller
 public class UserController {
     private final UserService userService;
+    private final FileUploadService fileUploadService;
 
     // DI
-    public UserController(UserService userService) {
+    public UserController(UserService userService, FileUploadService fileUploadService) {
         this.userService = userService;
+        this.fileUploadService = fileUploadService;
     }
 
     // get create user page
@@ -34,8 +44,15 @@ public class UserController {
 
     // create user
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
-    public String handleCreateOne(@ModelAttribute("userView") User userView) {
+    public String handleCreateOne(
+            @ModelAttribute("userView") User userView,
+            @RequestParam("fileView") MultipartFile file) {
+        // store file on server
+        String finalFileName = this.fileUploadService.store(file, "user");
+        // upsert user
+        // userView.setAvatar(finalFileName);
         this.userService.createOne(userView);
+
         return "redirect:/admin/user";
     }
 
