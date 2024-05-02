@@ -1,4 +1,4 @@
-package vn.nhannt.laptopshop.web;
+package vn.nhannt.laptopshop.web.admin;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String handleCreateOne(@ModelAttribute("userView") User userView) {
         this.userService.createOne(userView);
-        return "redirect:/admin/user/list";
+        return "redirect:/admin/user";
     }
 
     // get update user page
@@ -51,7 +51,7 @@ public class UserController {
     @PostMapping("/admin/user/update")
     public String handleUpdateOne(Model model, @ModelAttribute("userView") User userView) {
         this.userService.updateOne(userView);
-        return "redirect:/admin/user/list";
+        return "redirect:/admin/user";
     }
 
     // get delete user
@@ -67,11 +67,11 @@ public class UserController {
     public String handleDeleteOne(Model model, @ModelAttribute("userView") User userView) {
         // userView.setId((long) 10);
         this.userService.deleteOne(userView);
-        return "redirect:/admin/user/list";
+        return "redirect:/admin/user";
     }
 
     // get all
-    @RequestMapping("/admin/user/list")
+    @RequestMapping("/admin/user")
     public String handleGetAll(Model model) {
         List<User> users = this.userService.getAll();
         model.addAttribute("usersView", users);
@@ -79,11 +79,11 @@ public class UserController {
     }
 
     // get one
-    @RequestMapping("/admin/user/detail/{id}")
+    @RequestMapping("/admin/user/{id}")
     public String handleGetOne(Model model, @PathVariable Long id) {
         User user = this.userService.getOne(id);
         model.addAttribute("userView", user);
-        return "admin/user/detail-page";
+        return "admin/user/show-page";
     }
 
     // get home view

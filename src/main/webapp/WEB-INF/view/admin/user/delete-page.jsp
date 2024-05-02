@@ -23,7 +23,7 @@
                         <div class="col-md-6 col-12 mx-auto">
                             <div class="d-flex justify-content-between">
                                 <h3>Delete a user</h3>
-                                <a href="/admin/user/list" class="btn btn-primary">Back </a>
+                                <a href="/admin/user" class="btn btn-primary">Back </a>
                             </div>
                             <hr />
                             <f:form method="post" action="/admin/user/delete" modelAttribute="userView">
