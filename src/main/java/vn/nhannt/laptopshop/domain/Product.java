@@ -9,11 +9,12 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "products")
 public class Product {
-    // fields
+    // id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
+    // fields
     private String name;
     private double price;
     private String image;
@@ -23,6 +24,13 @@ public class Product {
     private long sold;
     private String factory;
     private String target;
+
+    // // note: ta ko quan tam, product o trong nhung don hang nao => ko can khai
+    // bao
+    // // relationship: 1Product => *ProductItem // inverse side: mapped by
+    // // set: unique, un-order
+    // @OneToMany(mappedBy = "product")
+    // private Set<ProductItem> productItems;
 
     // no-arg constructor
     public Product() {
