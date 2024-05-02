@@ -13,6 +13,18 @@
                 <title>Dashboard - Hỏi Dân IT</title>
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+                <!-- Display file -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(() => {
+                        const avatarFile = $("#avatarFile");
+                        avatarFile.change(function (e) {
+                            const imgURL = URL.createObjectURL(e.target.files[0]);
+                            $("#avatarPreview").attr("src", imgURL);
+                            $("#avatarPreview").css({ "display": "block" });
+                        });
+                    });
+                </script>
             </head>
 
             <body>
@@ -36,30 +48,50 @@
                                                 <a href="/admin/user" class="btn btn-primary">Back </a>
                                             </div>
                                             <hr />
-                                            <f:form method="post" action="/admin/user/update" modelAttribute="userView">
+                                            <f:form method="post" action="/admin/user/update" modelAttribute="userView"
+                                                enctype="multipart/form-data" class="row">
                                                 <div class="mb-3" style="display: none;">
                                                     <label class="form-label">Id:</label>
                                                     <f:input path="id" type="text" class="form-control" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12">
                                                     <label class="form-label">Email:</label>
                                                     <f:input path="email" type="email" class="form-control"
                                                         disabled="true" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Phone number:</label>
                                                     <f:input path="phone" type="text" class="form-control" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12 col-md-6">
                                                     <label class="form-label">Full Name:</label>
                                                     <f:input path="fullName" type="text" class="form-control" />
                                                 </div>
-                                                <div class="mb-3">
+                                                <div class="mb-3 col-12">
                                                     <label class="form-label">Address:</label>
                                                     <f:input path="address" type="text" class="form-control" />
                                                 </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label class="form-label">Role:</label>
+                                                    <f:select path="role.name" class="form-select">
+                                                        <f:option value="ADMIN">ADMIN</f:option>
+                                                        <f:option value="USER">USER</f:option>
+                                                    </f:select>
+                                                </div>
+                                                <div class="mb-3 col-12 col-md-6">
+                                                    <label for="avatarFile" class="form-label">Avatar:</label>
+                                                    <input path="avatar" name="fileView" type="file"
+                                                        class="form-control" id="avatarFile"
+                                                        accept=".png, .jpg, .jpeg" />
+                                                </div>
+                                                <div class="col-12 mb-3">
+                                                    <img style="max-height: 250px; display: none;" alt="avatar preview"
+                                                        id="avatarPreview" />
+                                                </div>
 
-                                                <button type="submit" class="btn btn-warning">Update</button>
+                                                <div class="col-12 mb-5">
+                                                    <button type="submit" class="btn btn-warning">Update</button>
+                                                </div>
                                             </f:form>
                                         </div>
 

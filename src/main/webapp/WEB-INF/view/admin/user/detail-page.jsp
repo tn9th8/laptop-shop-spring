@@ -43,6 +43,7 @@
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item">Email: ${userView.email}</li>
                                                     <li class="list-group-item">Full Name: ${userView.fullName}</li>
+                                                    <li class="list-group-item">Role: ${userView.role.name}</li>
                                                     <li class="list-group-item">Phone: ${userView.phone}</li>
                                                     <li class="list-group-item">Address: ${userView.address}</li>
                                                 </ul>

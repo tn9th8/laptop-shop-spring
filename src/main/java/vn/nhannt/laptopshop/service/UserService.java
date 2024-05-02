@@ -29,6 +29,8 @@ public class UserService {
         tempUser.setFullName(user.getFullName());
         tempUser.setPhone(user.getPhone());
         tempUser.setAddress(user.getAddress());
+        tempUser.setAvatar(user.getAvatar());
+        tempUser.setRole(user.getRole());
         // save
         final User existingUser = this.userRepository.save(tempUser); // save : upsert
         return existingUser;

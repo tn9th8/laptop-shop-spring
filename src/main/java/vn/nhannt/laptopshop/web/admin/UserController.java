@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import jakarta.servlet.ServletContext;
 import vn.nhannt.laptopshop.domain.User;
 import vn.nhannt.laptopshop.service.FileUploadService;
+import vn.nhannt.laptopshop.service.RoleService;
 import vn.nhannt.laptopshop.service.UserService;
 
 // Spring MVC
@@ -27,12 +29,20 @@ import vn.nhannt.laptopshop.service.UserService;
 @Controller
 public class UserController {
     private final UserService userService;
+    private final RoleService roleService;
     private final FileUploadService fileUploadService;
+    private final PasswordEncoder encoder;
 
     // DI
-    public UserController(UserService userService, FileUploadService fileUploadService) {
+    public UserController(
+            UserService userService,
+            RoleService roleService,
+            FileUploadService fileUploadService,
+            PasswordEncoder encoder) {
         this.userService = userService;
+        this.roleService = roleService;
         this.fileUploadService = fileUploadService;
+        this.encoder = encoder;
     }
 
     // get create user page
@@ -49,8 +59,11 @@ public class UserController {
             @RequestParam("fileView") MultipartFile file) {
         // store file on server
         String finalFileName = this.fileUploadService.store(file, "user");
+        // prepare user
+        userView.setAvatar(finalFileName);
+        userView.setPassword(this.encoder.encode(userView.getPassword()));
+        userView.setRole(this.roleService.getOneByName(userView.getRole().getName()));
         // upsert user
-        // userView.setAvatar(finalFileName);
         this.userService.createOne(userView);
 
         return "redirect:/admin/user";
@@ -66,7 +79,15 @@ public class UserController {
 
     // update one
     @PostMapping("/admin/user/update")
-    public String handleUpdateOne(Model model, @ModelAttribute("userView") User userView) {
+    public String handleUpdateOne(Model model,
+            @ModelAttribute("userView") User userView,
+            @RequestParam("fileView") MultipartFile file) {
+        // store file on server
+        String finalFileName = this.fileUploadService.store(file, "user");
+        // prepare user
+        userView.setAvatar(finalFileName);
+        userView.setRole(this.roleService.getOneByName(userView.getRole().getName()));
+        // upsert user
         this.userService.updateOne(userView);
         return "redirect:/admin/user";
     }
