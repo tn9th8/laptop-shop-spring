@@ -4,30 +4,35 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 // Spring data (Hibernate/JPA)
 // Domain-driven design
 @Entity
+@Table(name = "users")
 public class User {
     // fields, attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String email;
     private String password;
     private String fullName;
     private String address;
     private String phone;
+    private String avatar;
+    // field roleId
+
+    // no-arg constructor
+    public User() {
+    }
 
     // to string
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", fullName=" + fullName
-                + ", address=" + address + ", phone=" + phone + "]";
-    }
-
-    // no-arg constructor
-    public User() {
+                + ", address=" + address + ", phone=" + phone + ", avatar=" + avatar + "]";
     }
 
     // getter, setter
@@ -78,4 +83,13 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
 }
