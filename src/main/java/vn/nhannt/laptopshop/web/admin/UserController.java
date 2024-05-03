@@ -123,4 +123,5 @@ public class UserController {
         model.addAttribute("userView", user);
         return "admin/user/detail-page";
     }
+
 }
