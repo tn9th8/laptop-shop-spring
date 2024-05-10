@@ -11,21 +11,35 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 // Spring data (Hibernate/JPA)
 // Domain-driven design
 @Entity
 @Table(name = "users")
 public class User {
-    // id
+    // fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // fields
+    @NotNull
+    @Email
     private String email;
+
+    @NotNull
+    @Min(6)
+    @Max(30)
     private String password;
+
+    @NotNull
+    @Min(6)
+    @Max(30)
     private String fullName;
+
     private String address;
     private String phone;
     private String avatar;
